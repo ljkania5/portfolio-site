@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Projects · Your Name{% endblock %}
+
+{% block content %}
+<section>
+    <h1>Projects</h1>
+    <p>A selection of things I've built.</p>
+
+    <article class="project">
+        <h2>This Website</h2>
+        <p>A self-referential project: a portfolio site built with FastAPI, containerized with Docker, deployed on AWS using Terraform, and continuously deployed via GitHub Actions.</p>
+        <p class="tech">FastAPI · PostgreSQL · Docker · Terraform · AWS</p>
+    </article>
+
+    <article class="project">
+        <h2>Coming soon</h2>
+        <p>More projects will land here as I build them.</p>
+    </article>
+</section>
+{% endblock %}
