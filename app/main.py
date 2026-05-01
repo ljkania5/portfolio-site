@@ -26,3 +26,7 @@ async def projects(request: Request):
 @app.get("/resume", response_class=HTMLResponse)
 async def resume(request: Request):
     return templates.TemplateResponse(request=request, name="resume.html")
+
+@app.get("/health")
+async def health():
+    return {"status": "healthy"}
