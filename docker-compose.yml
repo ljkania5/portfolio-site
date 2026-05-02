@@ -1,0 +1,50 @@
+services:
+  # The FastAPI application
+  web:
+    # Build the image from the Dockerfile in the current directory
+    build: .
+    # Map host port 8000 to container port 8000
+    ports:
+      - "8000:8000"
+    # Mount the local ./app directory into the container at /app/app.
+    # This means code changes on your laptop appear instantly in the container —
+    # no rebuild needed during development.
+    volumes:
+      - ./app:/app/app
+    # Environment variables passed into the container
+    environment:
+      - DATABASE_URL=postgresql://portfolio_user:portfolio_pass@db:5432/portfolio_db
+    # Don't start the web service until the db is ready to accept connections
+    depends_on:
+      db:
+        condition: service_healthy
+    # Override the Dockerfile's CMD to enable auto-reload during dev
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # The PostgreSQL database
+  db:
+    # Use the official Postgres image, version 16
+    image: postgres:16
+    # Tell Postgres what to call the initial database, user, and password.
+    # These match what's in DATABASE_URL above.
+    environment:
+      - POSTGRES_DB=portfolio_db
+      - POSTGRES_USER=portfolio_user
+      - POSTGRES_PASSWORD=portfolio_pass
+    # Mount a named volume to persist the database files.
+    # Without this, your data dies whenever the container is recreated.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # Expose port 5432 on the host so you can connect with a GUI tool later if you want
+    ports:
+      - "5432:5432"
+    # A healthcheck so the web service knows when Postgres is actually ready
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U portfolio_user -d portfolio_db" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+# Declare the named volume used by the db service
+volumes:
+  postgres_data:
