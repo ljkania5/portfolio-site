@@ -13,7 +13,7 @@ services:
       - ./app:/app/app
     # Environment variables passed into the container
     environment:
-      - DATABASE_URL=postgresql://portfolio_user:portfolio_pass@db:5432/portfolio_db
+      - DATABASE_URL=postgresql://portfolio_user:${DB_PASSWORD}@db:5432/portfolio_db
     # Don't start the web service until the db is ready to accept connections
     depends_on:
       db:
@@ -30,7 +30,7 @@ services:
     environment:
       - POSTGRES_DB=portfolio_db
       - POSTGRES_USER=portfolio_user
-      - POSTGRES_PASSWORD=portfolio_pass
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     # Mount a named volume to persist the database files.
     # Without this, your data dies whenever the container is recreated.
     volumes:
