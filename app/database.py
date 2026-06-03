@@ -1,14 +1,11 @@
 import os
+from collections.abc import Iterator
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
-# Read the connection string from the environment (set in docker-compose.yml).
-# The fallback lets the app still start if the var is somehow missing.
-DATABASE_URL = os.environ.get(
-    "DATABASE_URL",
-    f"postgresql://portfolio_user:{os.getenv('DB_PASSWORD')}@db:5432/portfolio_db",
-)
+# Fail fast with a clear error if DATABASE_URL isn't set.
+DATABASE_URL = os.environ["DATABASE_URL"]
 
 # The engine manages the pool of actual connections to Postgres.
 engine = create_engine(DATABASE_URL)
@@ -23,9 +20,6 @@ class Base(DeclarativeBase):
 
 
 # FastAPI dependency: hands a session to a route, guarantees it's closed after.
-def get_db():
-    db = SessionLocal()
-    try:
+def get_db() -> Iterator[Session]:
+    with SessionLocal() as db:
         yield db
-    finally:
-        db.close()

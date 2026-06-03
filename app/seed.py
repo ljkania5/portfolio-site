@@ -1,3 +1,5 @@
+from sqlalchemy import func, select
+
 from app.database import Base, SessionLocal, engine
 from app.models import Project
 
@@ -25,10 +27,7 @@ def init_db():
     Base.metadata.create_all(bind=engine)
 
     # Seed only when the table is empty, so restarts don't create duplicates.
-    db = SessionLocal()
-    try:
-        if db.query(Project).count() == 0:
+    with SessionLocal() as db:
+        if db.scalar(select(func.count(Project.id))) == 0:
             db.add_all(Project(**data) for data in INITIAL_PROJECTS)
             db.commit()
-    finally:
-        db.close()

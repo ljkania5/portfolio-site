@@ -7,5 +7,5 @@ router = APIRouter()
 
 
 @router.get("/resume", response_class=HTMLResponse)
-async def resume(request: Request) -> HTMLResponse:
+def resume(request: Request) -> HTMLResponse:
     return templates.TemplateResponse(request=request, name="resume.html")

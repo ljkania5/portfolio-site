@@ -42,7 +42,7 @@ Then visit [http://127.0.0.1:8000](http://127.0.0.1:8000).
 ## Roadmap
 
 - [x] Phase 1: FastAPI app with templated multi-page site
-- [ ] Phase 2: Docker + PostgreSQL via Docker Compose
+- [x] Phase 2: Docker + PostgreSQL via Docker Compose
 - [ ] Phase 3: Deploy to AWS App Runner with RDS
 - [ ] Phase 4: Terraform IaC + GitHub Actions CI/CD
 - [ ] Phase 5: ECS Fargate, monitoring, blog
