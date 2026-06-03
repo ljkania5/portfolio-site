@@ -7,15 +7,14 @@
     <h1>Projects</h1>
     <p>A selection of things I've built.</p>
 
+    {% for project in projects %}
     <article class="project">
-        <h2>This Website</h2>
-        <p>A self-referential project: a portfolio site built with FastAPI, containerized with Docker, deployed on AWS using Terraform, and continuously deployed via GitHub Actions.</p>
-        <p class="tech">FastAPI · PostgreSQL · Docker · Terraform · AWS</p>
+        <h2>{{ project.title }}</h2>
+        <p>{{ project.description }}</p>
+        {% if project.tech %}
+        <p class="tech">{{ project.tech }}</p>
+        {% endif %}
     </article>
-
-    <article class="project">
-        <h2>Coming soon</h2>
-        <p>More projects will land here as I build them.</p>
-    </article>
+    {% endfor %}
 </section>
 {% endblock %}
