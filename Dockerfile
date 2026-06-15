@@ -13,13 +13,15 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-# Copy ONLY requirements.txt first, then install dependencies.
-# This is the layer-caching trick: as long as requirements.txt doesn't change,
+# Copy pyproject.toml first, then install dependencies.
+# This is the layer-caching trick: as long as pyproject.toml doesn't change,
 # Docker reuses the cached "pip install" layer on rebuilds — huge speedup.
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# A stub app/__init__.py lets pip read the project metadata without the full source.
+COPY pyproject.toml .
+RUN mkdir -p app && touch app/__init__.py
+RUN pip install --no-cache-dir .
 
-# Now copy the rest of the application code.
+# Now copy the real app code, which overwrites the stub.
 # This is the layer that changes most often, so it's last.
 COPY ./app ./app
 
