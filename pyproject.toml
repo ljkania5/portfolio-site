@@ -18,6 +18,9 @@ dependencies = [
     "pydantic==2.13.3",
 ]
 
+[project.optional-dependencies]
+dev = ["ruff", "mypy", "pytest"]
+
 [tool.ruff]
 line-length = 100
 target-version = "py311"
@@ -32,6 +35,9 @@ select = [
     "B",   # flake8-bugbear (likely bugs)
     "UP",  # pyupgrade (modernize syntax)
     "SIM", # flake8-simplify
+]
+ignore = [
+    "B008", # Depends() in default args is intentional FastAPI DI pattern
 ]
 
 [tool.mypy]

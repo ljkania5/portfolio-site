@@ -1,3 +1,5 @@
+from collections.abc import Sequence
+
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse
 from sqlalchemy import select
@@ -11,8 +13,8 @@ router = APIRouter()
 
 
 @router.get("/projects", response_class=HTMLResponse)
-async def projects(request: Request, db: Session = Depends(get_db)) -> HTMLResponse:
-    project_list = db.scalars(select(Project).order_by(Project.id)).all()
+def projects(request: Request, db: Session = Depends(get_db)) -> HTMLResponse:
+    project_list: Sequence[Project] = db.scalars(select(Project).order_by(Project.id)).all()
     return templates.TemplateResponse(
         request=request,
         name="projects.html",
