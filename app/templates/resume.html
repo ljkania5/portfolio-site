@@ -3,14 +3,60 @@
 {% block title %}Resume · Logan Kania{% endblock %}
 
 {% block content %}
-<section>
-    <h1>Resume</h1>
-    <p><a href="/static/resume.pdf" download>Download PDF</a></p>
+<section class="reveal">
+    <div class="section-head">
+        <h1>Resume</h1>
+        <p class="subtitle">A snapshot of where I'm at.</p>
+    </div>
+    <a href="/static/resume.pdf" download class="btn btn-primary">Download PDF ↓</a>
+</section>
 
+<section class="reveal">
     <h2>Experience</h2>
-    <p>Coming soon — I'll fill this in as I build out the site.</p>
 
+    <div class="job">
+        <div class="job-head">
+            <h3>Software Engineer II</h3>
+            <span class="job-meta">Humana · Jul 2024 – Present</span>
+        </div>
+        <ul>
+            <li>Build and maintain software alongside a team of developers.</li>
+            <li>Develop data engineering and orchestration pipelines using Databricks and Prefect.</li>
+        </ul>
+    </div>
+
+    <div class="job">
+        <div class="job-head">
+            <h3>Software Engineer Intern</h3>
+            <span class="job-meta">Humana · May 2023 – Jul 2024</span>
+        </div>
+        <ul>
+            <li>Contributed to team software projects, growing into a full-time engineering role.</li>
+        </ul>
+    </div>
+
+    <div class="job">
+        <div class="job-head">
+            <h3>Portfolio Site <span class="job-aside">— Self-directed project</span></h3>
+        </div>
+        <ul>
+            <li>Built a cloud-native portfolio app with FastAPI, Jinja2, and PostgreSQL.</li>
+            <li>Containerized with Docker &amp; Docker Compose; provisioning AWS infrastructure with Terraform.</li>
+            <li>Setting up continuous deployment via GitHub Actions.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="reveal">
     <h2>Skills</h2>
-    <p>Python, SQL, C++, and (in progress) AWS, Docker, Terraform.</p>
+    <div class="chips">
+        <span class="chip">Python</span>
+        <span class="chip">SQL</span>
+        <span class="chip">C++</span>
+        <span class="chip">AWS</span>
+        <span class="chip">Docker</span>
+        <span class="chip">Terraform</span>
+    </div>
+    <p style="margin-top:1rem;color:var(--color-text-dim);font-size:0.9rem;">AWS, Docker, and Terraform in progress.</p>
 </section>
 {% endblock %}

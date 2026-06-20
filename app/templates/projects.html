@@ -3,18 +3,22 @@
 {% block title %}Projects · Logan Kania{% endblock %}
 
 {% block content %}
-<section>
-    <h1>Projects</h1>
-    <p>A selection of things I've built.</p>
+<section class="reveal">
+    <div class="section-head">
+        <h1>Projects</h1>
+        <p class="subtitle">A selection of things I've built.</p>
+    </div>
 
-    {% for project in projects %}
-    <article class="project">
-        <h2>{{ project.title }}</h2>
-        <p>{{ project.description }}</p>
-        {% if project.tech %}
-        <p class="tech">{{ project.tech }}</p>
-        {% endif %}
-    </article>
-    {% endfor %}
+    <div class="grid">
+        {% for project in projects %}
+        <article class="card">
+            <h2>{{ project.title }}</h2>
+            <p>{{ project.description }}</p>
+            {% if project.tech %}
+            <p class="tech">{{ project.tech }}</p>
+            {% endif %}
+        </article>
+        {% endfor %}
+    </div>
 </section>
 {% endblock %}

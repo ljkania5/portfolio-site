@@ -16,7 +16,9 @@ def test_home_page_renders(client):
     assert resp.status_code == 200
     assert "text/html" in resp.headers["content-type"]
     body = resp.text
-    assert "Hi, I'm Logan Kania." in body
+    # The name is wrapped in a gradient <span>, so assert on the parts.
+    assert "Hi, I'm" in body
+    assert "Logan Kania" in body
     assert "<title>Home · Logan Kania</title>" in body
 
 

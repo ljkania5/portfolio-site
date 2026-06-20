@@ -3,21 +3,29 @@
 {% block title %}Home · Logan Kania{% endblock %}
 
 {% block content %}
-<section class="hero">
-    <h1>Hi, I'm Logan Kania.</h1>
-    <p class="tagline">Software engineer. Cloud and DevOps in progress.</p>
-    <p>I build things, break things, and write about what I learn along the way. When I'm not at home, you'll probably find me on a trail, in the gym, or hanging out with friends.</p>
+<section class="hero reveal">
+    <span class="eyebrow"><span class="dot"></span> Available for cloud &amp; full-stack roles</span>
+    <h1>Hi, I'm <span class="gradient-text">Logan Kania</span>.</h1>
+    <p class="tagline">Software engineer. Cloud &amp; DevOps in progress.</p>
+    <p class="lead">I build things, break things, and write about what I learn along the way. When I'm not at
+        home, you'll probably find me on a trail, in the gym, or hanging out with friends.</p>
+    <div class="cta-row">
+        <a href="/projects" class="btn btn-primary">View my work →</a>
+        <a href="/resume" class="btn btn-ghost">Resume</a>
+    </div>
 </section>
 
-<section class="current">
-    <h2>Currently</h2>
-    <ul>
-        <li>Building this site as a cloud/DevOps showcase</li>
-        <li>Learning AWS, Docker, and Terraform</li>
-        <li>Working as a software engineer at Humana</li>
-        <li>Working with a team of developers to build and maintain software</li>
-        <li>Using Databricks and Prefect for data engineering and orchestration</li>
-        <li>Exploring opportunities in cloud and DevOps</li>
-    </ul>
+<section class="current reveal">
+    <div class="section-head">
+        <h2>Currently</h2>
+    </div>
+    <div class="current-grid">
+        <div class="current-item">Building this site as a cloud/DevOps showcase</div>
+        <div class="current-item">Learning AWS, Docker, and Terraform</div>
+        <div class="current-item">Working as a Software Engineer II at Humana</div>
+        <div class="current-item">Building &amp; maintaining software with a team of developers</div>
+        <div class="current-item">Using Databricks and Prefect for data engineering and orchestration</div>
+        <div class="current-item">Exploring opportunities in cloud and DevOps</div>
+    </div>
 </section>
 {% endblock %}
