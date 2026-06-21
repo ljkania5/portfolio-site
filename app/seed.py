@@ -4,7 +4,7 @@ from app.database import Base, SessionLocal, engine
 from app.models import Project
 
 # Mirrors what was hardcoded in projects.html.
-INITIAL_PROJECTS = [
+INITIAL_PROJECTS: list[dict[str, str | None]] = [
     {
         "title": "This Website",
         "description": (
@@ -22,12 +22,12 @@ INITIAL_PROJECTS = [
 ]
 
 
-def init_db():
+def init_db() -> None:
     # Create tables for any models that don't exist yet.
     Base.metadata.create_all(bind=engine)
 
     # Seed only when the table is empty, so restarts don't create duplicates.
     with SessionLocal() as db:
         if db.scalar(select(func.count(Project.id))) == 0:
-            db.add_all(Project(**data) for data in INITIAL_PROJECTS)
+            db.add_all([Project(**data) for data in INITIAL_PROJECTS])
             db.commit()
